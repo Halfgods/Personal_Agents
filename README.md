@@ -1,9 +1,4 @@
 # Project JARVIS: The Self-Extending Agentic Operating System
-
-**Subtitle:** A fully local, privacy-first AI ecosystem that dynamically spawns specialized clones and autonomously interacts with your local environment.
-
-**Submission Track:** Concierge Agents
-
 ---
 
 ## 🖼️ Project Thumbnail
@@ -36,7 +31,3 @@ Instead of a single chatbot, JARVIS acts as a digital Chief of Staff. It is a ce
 JARVIS is completely local-first. Powered by a local FastAPI backend and lightweight local models (like `llama3.2:3b` via Ollama), no personal data, local file structures, or commands ever leave the user's machine. It fulfills the core promise of the Concierge track: deeply personal automation without sacrificing an ounce of privacy.
 
 ---
-
-## 🔗 Attachments
-*   **GitHub Repository:** [https://github.com/Halfgods/Personal_Agents](https://github.com/Halfgods/Personal_Agents)
-*   **Demo Video:** *(Add YouTube link here before submission)*
