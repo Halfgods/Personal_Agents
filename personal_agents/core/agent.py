@@ -46,8 +46,13 @@ class Agent(ABC):
 Respond helpfully. If you need to use a tool, include the tool call inline."""
         return self.llm.generate(prompt, system_prompt=self.system_prompt())
 
-    def chat(self, messages: list[dict]) -> str:
-        sys_msg = {"role": "system", "content": self.system_prompt()}
+    def chat(self, messages: list[dict], context: dict[str, Any] | None = None) -> str:
+        ctx_str = ""
+        if context:
+            ctx_str = f"\n\nSystem Context: {json.dumps(context, indent=2)}"
+            
+        sys_prompt = self.system_prompt() + ctx_str
+        sys_msg = {"role": "system", "content": sys_prompt}
         return self.llm.chat([sys_msg] + messages)
 
 

@@ -11,3 +11,10 @@ dist/
 
 # Virtual environments
 .venv
+venv/
+
+# Temp files
+dir
+.DS_Store
+.tempmediaStorage/
+personal_agents/agents/dynamic/*.json

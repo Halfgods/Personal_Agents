@@ -51,9 +51,9 @@ Which agent should handle this? Reply with just the agent name, or "general" if 
 
         agent_name, agent = self.route(user_input)
         if agent is None:
-            response = self.llm.chat(self.conversation_history[-5:])
+            response = self.llm.chat(self.conversation_history[-10:])
         else:
-            response = agent.run(user_input, self.user_context)
+            response = agent.chat(self.conversation_history[-10:], self.user_context)
 
         self.conversation_history.append({"role": "assistant", "content": response})
         return response

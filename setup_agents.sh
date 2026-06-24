@@ -14,8 +14,17 @@ fi
 echo "Activating virtual environment..."
 source "$VENV_DIR/bin/activate"
 
-echo "Installing package..."
-pip install -e . 2>/dev/null || python -m pip install -e .
+echo "Installing backend dependencies..."
+pip install -e . fastapi uvicorn pydantic 2>/dev/null || python -m pip install -e . fastapi uvicorn pydantic
+
+echo "Installing frontend dependencies..."
+if [ -d "frontend" ]; then
+    cd frontend
+    npm install
+    cd ..
+else
+    echo "Frontend directory not found. Skipping frontend setup."
+fi
 
 echo ""
 echo "=== Checking LLM backend ==="
@@ -23,7 +32,7 @@ echo "=== Checking LLM backend ==="
 # Check for Ollama
 if command -v ollama &>/dev/null; then
     echo "[OK] Ollama is installed!"
-    if ! ollama list 2>/dev/null | grep -q .; then
+    if ! ollama list 2>/dev/null | tail -n +2 | grep -q .; then
         echo "  No models found. Pulling a lightweight model..."
         echo "  (This downloads ~2GB, may take a while)"
         ollama pull llama3.2:3b || ollama pull phi:2.7b || ollama pull gemma:2b
@@ -40,7 +49,10 @@ fi
 echo ""
 echo "=== Setup complete! ==="
 echo ""
-echo "Run the agents:"
+echo "Start the interactive web app:"
+echo "  ./run_web.sh"
+echo ""
+echo "Or run the CLI version:"
 echo "  source .venv/bin/activate"
 echo "  agents"
 echo ""
